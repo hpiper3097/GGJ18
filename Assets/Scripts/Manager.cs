@@ -38,4 +38,10 @@ public class Manager : MonoBehaviour {
             newPlayer.tag = "Player";
         }
     }
+
+    public string LeadingZero(int n)
+    {
+        return n.ToString().PadLeft(2, '0');
+    }
+
 }
