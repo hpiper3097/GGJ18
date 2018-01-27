@@ -25,9 +25,11 @@ public class PlayerController : MonoBehaviour {
             Vector2 movement = new Vector2(moveH, moveV);
             rb.velocity = movement * speed;
 
+            //swap on space
             if(Input.GetKeyDown("space"))
             {
                 m.EntityChangeA(gameObject);
+                rb.velocity = Vector2.zero;
             }
         }
     }
