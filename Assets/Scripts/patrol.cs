@@ -40,7 +40,6 @@ public class patrol : MonoBehaviour
 
     void Update()
     {
-
         // Choose the next destination point when the agent gets
         // close to the current one.
         if (!agent.pathPending && agent.remainingDistance < 0.5f)

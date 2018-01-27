@@ -68,7 +68,7 @@ public class oneTimeDoorBehavior : MonoBehaviour
 
     private void OnCollisionStay(Collision other)
     {
-        if (other.gameObject.tag == "Controllable")
+        if (other.gameObject.tag == "Player")
         {
             isOpening = true;
         }

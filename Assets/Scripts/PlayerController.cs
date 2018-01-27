@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour {
         watching = 0;
         sprite = transform.GetChild(0).GetComponent<SpriteRenderer>(); //bad practice, should try to assign this in the editor but it's a game jam so im not rdoing this
         colors = sprite.color;
+        sprite.color = new Vector4(colors.x, colors.y, colors.z, 0);
         sprite.enabled = false;
 	}
 	
@@ -45,11 +46,20 @@ public class PlayerController : MonoBehaviour {
             }
             //handle being watched
             if (watching != 0)
-                sprite.color = new Vector4(colors.x, colors.y, colors.z, colors.w - watchSpeed);
-            else if (colors.w < 1)
-                sprite.color = new Vector4(colors.x, colors.y, colors.z, colors.w + watchSpeed);
-            else
+            {
+                colors = sprite.color;
+                sprite.color = new Vector4(colors.x, colors.y, colors.z, colors.w + watchSpeed / 65);
+                if (colors.w >= 1)
+                {
+                    Destroy(gameObject); //game over
+                }
+            }
+            else if (colors.w > 0) 
+            {
+                colors = sprite.color;
+                sprite.color = new Vector4(colors.x, colors.y, colors.z, colors.w - watchSpeed / 65);
                 sprite.enabled = false;
+            }
         }
     }
     

@@ -72,7 +72,7 @@ public class DoorBehaviour : MonoBehaviour {
     
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Controllable")
+        if (other.gameObject.tag == "Player")
         {
             isOpening = true;
         }
