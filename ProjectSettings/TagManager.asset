@@ -9,6 +9,9 @@ TagManager:
   - Manager
   - SlowTile
   - Watch
+  - Door
+  - goal
+  - Goal
   layers:
   - Default
   - TransparentFX
