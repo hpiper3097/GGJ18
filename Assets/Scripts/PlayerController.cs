@@ -6,13 +6,14 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody2D rb;
     private Manager m;
-    public int speed = 10;
+    private CharacterComponent c;
     public bool active;
 
 	// Use this for initialization
 	void Start () {
         rb = gameObject.GetComponent<Rigidbody2D>();
         m = GameObject.FindWithTag("Manager").GetComponent<Manager>();
+        c = gameObject.GetComponent<CharacterComponent>();
 	}
 	
 	// Update is called once per frame
@@ -23,8 +24,7 @@ public class PlayerController : MonoBehaviour {
             float moveH = Input.GetAxis("Horizontal");
 
             Vector2 movement = new Vector2(moveH, moveV);
-            rb.velocity = movement * speed;
-
+            rb.velocity = movement * c.speed;
             //swap on space
             if(Input.GetKeyDown("space"))
             {
