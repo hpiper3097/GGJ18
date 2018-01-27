@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    private Rigidbody2D rb;
+    private Rigidbody rb;
     private Manager m;
     private CharacterComponent c;
     public bool active;
 
 	// Use this for initialization
 	void Start () {
-        rb = gameObject.GetComponent<Rigidbody2D>();
+        rb = gameObject.GetComponent<Rigidbody>();
         m = GameObject.FindWithTag("Manager").GetComponent<Manager>();
         c = gameObject.GetComponent<CharacterComponent>();
 	}
@@ -22,14 +22,13 @@ public class PlayerController : MonoBehaviour {
         {
             float moveV = Input.GetAxis("Vertical");
             float moveH = Input.GetAxis("Horizontal");
-
-            Vector2 movement = new Vector2(moveH, moveV);
+            Vector3 movement = new Vector3(moveH, rb.velocity.y/c.speed, moveV);
             rb.velocity = movement * c.speed;
             //swap on space
             if(Input.GetKeyDown("space"))
             {
                 m.EntityChangeA(gameObject);
-                rb.velocity = Vector2.zero;
+                rb.velocity = Vector3.zero;
             }
         }
     }
