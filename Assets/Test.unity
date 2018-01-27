@@ -654,7 +654,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &709434636
 Light:
   m_ObjectHideFlags: 0
@@ -743,6 +743,7 @@ GameObject:
   - component: {fileID: 737118930}
   - component: {fileID: 737118929}
   - component: {fileID: 737118928}
+  - component: {fileID: 737118932}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -813,6 +814,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 45, y: 45, z: 0}
+--- !u!114 &737118932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 737118927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69d1341e5b04783468cfd72923708956, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: Player
+  damping: 1
 --- !u!1 &784404244
 GameObject:
   m_ObjectHideFlags: 0
@@ -1804,7 +1818,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cb6f7ae11d1c394daca1cdd0e92e0ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: 
 --- !u!4 &1976488073 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4317213343065816, guid: 171a82aaa5c735344b364aecc4a59e03,
