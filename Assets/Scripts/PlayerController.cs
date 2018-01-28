@@ -34,8 +34,8 @@ public class PlayerController : MonoBehaviour {
         if (active)
         {
             //movement
-            float moveV = Input.GetAxis("Vertical") * Time.deltaTime * 75.0f;
-            float moveH = Input.GetAxis("Horizontal") * Time.deltaTime * 75.0f;
+            float moveV = Input.GetAxis("Vertical");// * Time.deltaTime * 75.0f;
+            float moveH = Input.GetAxis("Horizontal");// * Time.deltaTime * 75.0f;
             Vector3 movement = new Vector3(moveH, rb.velocity.y/c.speed, moveV);
             rb.velocity = movement * c.speed;
             //swap on space

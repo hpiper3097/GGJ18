@@ -18,7 +18,7 @@ public class TargetTake : MonoBehaviour {
         {
             if (other.gameObject.tag == "Controllable" && other.gameObject == m.nearestEntity)
             {
-                other.gameObject.GetComponent<Light>().intensity = 4;
+                other.gameObject.GetComponent<Light>().intensity = 10;
             }
             else if(other.gameObject.tag == "Controllable")
                 other.gameObject.GetComponent<Light>().intensity = 0;
