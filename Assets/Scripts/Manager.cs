@@ -5,6 +5,7 @@ using UnityEngine;
 public class Manager : MonoBehaviour {
 
     public GameObject[] entities;
+    public GameObject nearestEntity;
 
 	// Use this for initialization
 	void Start () {
@@ -14,35 +15,37 @@ public class Manager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         entities = GameObject.FindGameObjectsWithTag("Controllable");
+        findNearest(GameObject.FindWithTag("Player"));
+    }
+
+    public void findNearest(GameObject player)
+    {
+        float dif = 999.0f;
+        foreach (var i in entities)
+        {
+            float vecDiff = Vector3.Distance(player.GetComponent<Rigidbody>().position, i.GetComponent<Rigidbody>().position);
+            if (vecDiff < dif)
+            {
+                dif = vecDiff;
+                nearestEntity = i;
+            }
+        }
     }
 
     public void EntityChangeA(GameObject player)
     {
-        GameObject newPlayer = null;
         int pdTT = player.GetComponent<CharacterComponent>().distanceToTake;
-        float dif = 999.0f;
-        foreach(var i in entities)
-        {
-            int idTGT = i.GetComponent<CharacterComponent>().distanceToGetTook;
+        Vector2 ePos = nearestEntity.GetComponent<Rigidbody>().position;
+        findNearest(player);
             //comments are for pussies
-            if (new Vector2(Mathf.Abs(player.GetComponent<Rigidbody2D>().position.x - i.GetComponent<Rigidbody2D>().position.x),
-                Mathf.Abs(player.GetComponent<Rigidbody2D>().position.y - i.GetComponent<Rigidbody2D>().position.y) ).magnitude < pdTT
-                && new Vector2(Mathf.Abs(player.GetComponent<Rigidbody2D>().position.x - i.GetComponent<Rigidbody2D>().position.x),
-                Mathf.Abs(player.GetComponent<Rigidbody2D>().position.y - i.GetComponent<Rigidbody2D>().position.y)).magnitude < idTGT
-                && new Vector2(Mathf.Abs(player.GetComponent<Rigidbody2D>().position.x - i.GetComponent<Rigidbody2D>().position.x),
-                Mathf.Abs(player.GetComponent<Rigidbody2D>().position.y - i.GetComponent<Rigidbody2D>().position.y)).magnitude < dif)
-            {
-                newPlayer = i;
-                dif = new Vector2(Mathf.Abs(player.GetComponent<Rigidbody2D>().position.x - i.GetComponent<Rigidbody2D>().position.x),
-                Mathf.Abs(player.GetComponent<Rigidbody2D>().position.y - i.GetComponent<Rigidbody2D>().position.y)).magnitude;
-            }
-        }
-        if (newPlayer)
+            if (Vector2.Distance(ePos, player.GetComponent<Rigidbody>().position) < pdTT )
         {
             player.GetComponent<PlayerController>().SetState(false);
             player.tag = "Controllable";
-            newPlayer.GetComponent<PlayerController>().SetState(true);
-            newPlayer.tag = "Player";
+            nearestEntity.GetComponent<PlayerController>().SetState(true);
+            nearestEntity.tag = "Player";
+            nearestEntity.GetComponent<Light>().intensity = 0;
         }
+     
     }
 }

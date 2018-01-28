@@ -9,9 +9,7 @@ public class CharacterComponent : MonoBehaviour {
 
     public float speed;
 
-    bool[] unlock = new bool[2];
+    public bool[] unlock = new bool[2];
 
     public float health;
-
-    public int a, b, c;
 }
