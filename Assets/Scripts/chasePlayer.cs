@@ -33,7 +33,9 @@ public class chasePlayer : MonoBehaviour {
 
     void FixedUpdate()
     {
+
         //target the player
+        target = GameObject.FindWithTag("Player").transform;
         //update distance  to target
         float distance = Vector3.Distance(self.position, target.position);
         //check to make sure within aggro range
@@ -61,7 +63,6 @@ public class chasePlayer : MonoBehaviour {
         else
         {
             chasing = false;
-            returning = true;
             target = originalPosition;
         }
     }
