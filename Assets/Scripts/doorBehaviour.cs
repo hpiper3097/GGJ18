@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DoorBehaviour : MonoBehaviour {
+public class doorBehaviour : MonoBehaviour
+{
 
     private bool isOpen;
     private bool isOpening;
@@ -72,7 +73,7 @@ public class DoorBehaviour : MonoBehaviour {
     
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Controllable")
         {
             isOpening = true;
         }
