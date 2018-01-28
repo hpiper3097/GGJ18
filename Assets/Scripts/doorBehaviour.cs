@@ -11,12 +11,14 @@ public class doorBehaviour : MonoBehaviour
     private bool isClosing;
     private float alphaLevel = .1f;
     public string sceneName;
+    private bool[] key;
 
 	// Use this for initialization
 	void Start () {
         isOpen = false;
         isOpening = false;
         isClosing = false;
+        key = new bool[2];
 	}
 	
 	// Update is called once per frame
@@ -65,14 +67,34 @@ public class doorBehaviour : MonoBehaviour
         }
         
 	}
-    
+
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Player")
-        {
-            isOpening = true;
-        }
+        if (key[0] == false && key[1] == false)
+            if (other.gameObject.tag == "Controllable")
+            {
+                isOpening = true;
+                if (sceneName != null)
+                    SceneManager.LoadScene(sceneName);
+            }
+
+            else if (key[0] == false && key[1] == true)
+            {
+                if (other.gameObject.tag == "Controllable" && key == other.gameObject.GetComponent<CharacterComponent>().unlock)
+                {
+                    isOpening = true;
+                }
+            }
+
+            else if (key[0] == true && key[1] == false)
+            {
+                if (other.gameObject.tag == "Controllable" && key == other.gameObject.GetComponent<CharacterComponent>().unlock)
+                {
+                    isOpening = true;
+                }
+            }
     }
+
     private void OnCollisionExit(Collision collision)
     {
         isOpen = false;

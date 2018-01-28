@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class runAway : MonoBehaviour {
 
+    private bool isControlled;
     private Transform target; //the enemy's target
     private int moveSpeed = 3; //move speed
     public float range = 10f;
@@ -14,6 +15,7 @@ public class runAway : MonoBehaviour {
 
     void Awake()
     {
+        isControlled = false;
         self = transform; //cache transform data for easy access/performance
         rb = gameObject.GetComponent<Rigidbody>();
     }
@@ -39,6 +41,12 @@ public class runAway : MonoBehaviour {
             //stop following the player
             rb.velocity = new Vector3(0, 0, 0);
         }
+        if(GetComponent<PlayerController>().isActiveAndEnabled)
+        {
+            GetComponent<runAway>().enabled = false;
+        }
+        else { 
+}
     }
 
 }
