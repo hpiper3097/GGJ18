@@ -12,6 +12,7 @@ TagManager:
   - Door
   - goal
   - Goal
+  - AI
   layers:
   - Default
   - TransparentFX

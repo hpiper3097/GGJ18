@@ -32,8 +32,6 @@ public class doorBehaviour : MonoBehaviour
                 if (color.w >= 0)
                 {
                     gameObject.GetComponent<MeshRenderer>().material.color = new Vector4(color.x, color.y, color.z, color.w - alphaLevel);
-                    gameObject.GetComponent<Renderer>().material.color = new Vector4(color.x, color.y, color.z, color.w - alphaLevel);
-
                 }
                 else //set the door to open. no longer opening.
                 {
@@ -63,9 +61,6 @@ public class doorBehaviour : MonoBehaviour
             {
                 isOpen = false;
                 isClosing = false;
-                //change scenes if one is provided
-                if (sceneName != null)
-                    SceneManager.LoadScene(sceneName);
             }
         }
         
@@ -73,7 +68,7 @@ public class doorBehaviour : MonoBehaviour
     
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Controllable")
+        if (other.gameObject.tag == "Player")
         {
             isOpening = true;
         }
