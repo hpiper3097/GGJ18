@@ -19,8 +19,4 @@ public class persistanceID : MonoBehaviour {
             GameObject.Destroy(this);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
