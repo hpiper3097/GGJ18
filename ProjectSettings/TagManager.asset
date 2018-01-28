@@ -7,6 +7,11 @@ TagManager:
   - Controllable
   - PlayerTag
   - Manager
+  - SlowTile
+  - Watch
+  - Door
+  - goal
+  - Goal
   layers:
   - Default
   - TransparentFX

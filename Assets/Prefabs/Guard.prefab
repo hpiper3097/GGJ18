@@ -9,52 +9,53 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1460282414362202}
+  m_RootGameObject: {fileID: 1558061890223882}
   m_IsPrefabParent: 1
---- !u!1 &1460282414362202
+--- !u!1 &1558061890223882
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4381952691743410}
-  - component: {fileID: 212865329035102414}
-  - component: {fileID: 61191433490717566}
-  - component: {fileID: 50018602773965982}
-  - component: {fileID: 114740790206628308}
+  - component: {fileID: 4050821657518832}
+  - component: {fileID: 212466292208446918}
+  - component: {fileID: 61639967987306578}
+  - component: {fileID: 50550792126076710}
+  - component: {fileID: 114496969388950418}
+  - component: {fileID: 114667099910035960}
   m_Layer: 0
-  m_Name: Player
-  m_TagString: Player
+  m_Name: Guard
+  m_TagString: Controllable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4381952691743410
+--- !u!4 &4050821657518832
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1460282414362202}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.66, y: 0.72, z: 0}
+  m_GameObject: {fileID: 1558061890223882}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.6, y: 1.52, z: 0.05251775}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50018602773965982
+--- !u!50 &50550792126076710
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1460282414362202}
+  m_GameObject: {fileID: 1558061890223882}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 1
-  m_Mass: 10
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.1
   m_GravityScale: 0
@@ -63,14 +64,14 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &61191433490717566
+--- !u!61 &61639967987306578
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1460282414362202}
+  m_GameObject: {fileID: 1558061890223882}
   m_Enabled: 1
-  m_Density: 10
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
@@ -88,25 +89,45 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114740790206628308
+--- !u!114 &114496969388950418
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1460282414362202}
+  m_GameObject: {fileID: 1558061890223882}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75eae4182f5e8114f854d3f5823cdb6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
-  active: 1
---- !u!212 &212865329035102414
+  rb: {fileID: 0}
+  m: {fileID: 0}
+  speed: 10
+  active: 0
+--- !u!114 &114667099910035960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1558061890223882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e17731f99bc642c4080f258112b7fcdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceToTake: 6
+  distanceToGetTook: 12
+  speed: 6
+  health: 10
+  a: 1
+  b: 0
+  c: 0
+--- !u!212 &212466292208446918
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1460282414362202}
+  m_GameObject: {fileID: 1558061890223882}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -134,7 +155,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: cb073bad4764ee54e93aff98b07735c1, type: 3}
   m_Color: {r: 0.75, g: 0.13235293, b: 0.13235293, a: 1}
   m_FlipX: 0

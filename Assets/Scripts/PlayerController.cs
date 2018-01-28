@@ -1,65 +1,81 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using System;
 
 public class PlayerController : MonoBehaviour {
 
-    private Rigidbody2D rb;
+    private Rigidbody rb;
     private Manager m;
-    public int speed = 10;
+    private CharacterComponent c;
     public bool active;
-    private Text textClock;
-    private float timerDuration;
-    private float timerStartTime;
 
+    //values used to keep track of watching
+    public float watchSpeed;
+    private int watching;
+    private SpriteRenderer sprite;
+    private Vector4 colors;
 
-    // Use this for initialization
-    void Start () {
-        //clock
-        textClock = GetComponent<Text>();
-        TimerReset(30);
-
-        rb = gameObject.GetComponent<Rigidbody2D>();
+	// Use this for initialization
+	void Start () {
+        rb = gameObject.GetComponent<Rigidbody>();
         m = GameObject.FindWithTag("Manager").GetComponent<Manager>();
+        c = gameObject.GetComponent<CharacterComponent>();
+
+        //initialize values related to watching
+        watching = 0;
+        sprite = transform.GetChild(0).GetComponent<SpriteRenderer>(); //bad practice, should try to assign this in the editor but it's a game jam so im not rdoing this
+        colors = sprite.color;
+        sprite.color = new Vector4(colors.x, colors.y, colors.z, 0);
+        sprite.enabled = false;
 	}
 	
-	// Update is called once per frame
+	// FixedUpdate is called a fixed number of times per frame
 	void FixedUpdate () {
-        //clock
-        string timerMessage = "YOU LOSE!!!";
-        int timeLeft = (int) TimerRemaining();
-        if (timeLeft > 0)
-            timerMessage = "Seconds Remaining = " + m.LeadingZero(timeLeft);
-
-
         if (active)
         {
-            float moveV = Input.GetAxis("Vertical");
-            float moveH = Input.GetAxis("Horizontal");
-
-            Vector2 movement = new Vector2(moveH, moveV);
-            rb.velocity = movement * speed;
-
+            //movement
+            float moveV = Input.GetAxis("Vertical") * Time.deltaTime * 75.0f;
+            float moveH = Input.GetAxis("Horizontal") * Time.deltaTime * 75.0f;
+            Vector3 movement = new Vector3(moveH, rb.velocity.y/c.speed, moveV);
+            rb.velocity = movement * c.speed;
+            //swap on space
             if(Input.GetKeyDown("space"))
             {
                 m.EntityChangeA(gameObject);
+                rb.velocity = Vector3.zero;
+            }
+            //handle being watched
+            if (watching != 0)
+            {
+                colors = sprite.color;
+                sprite.color = new Vector4(colors.x, colors.y, colors.z, colors.w + watchSpeed / 65);
+                if (colors.w >= 1)
+                {
+                    Destroy(gameObject); //game over
+                }
+            }
+            else if (colors.w > 0) 
+            {
+                colors = sprite.color;
+                sprite.color = new Vector4(colors.x, colors.y, colors.z, colors.w - watchSpeed / 65);
+                sprite.enabled = false;
             }
         }
     }
-
-    public void TimerReset(float delay)
+    
+    //keep a count of the number of things watching the player
+    void OnTriggerEnter(Collider other)
     {
-        timerDuration = delay;
-        timerStartTime = Time.time;
+        if(other.gameObject.tag == "Watch")
+        {
+            watching++;
+            sprite.enabled = true;
+        }
     }
-
-    public float TimerRemaining()
+    void OnTriggerExit(Collider other)
     {
-        float timeSpent = Time.time - timerStartTime;
-        float timeLeft = timerDuration - timeSpent;
-        return timeLeft;
+        if (other.gameObject.tag == "Watch")
+            watching--;
     }
 
     public void SetState(bool boo)
